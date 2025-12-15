@@ -1,0 +1,1010 @@
+{
+  "metadata": {
+    "title": "Machine Learning Exam Revision Quiz",
+    "course": "Python and Machine Learning (ELEC70137)",
+    "total_questions": 100,
+    "topics": ["Linear Regression", "Logistic Regression", "Decision Trees", "Random Forests", "K-Means", "KNN", "SVM", "Regularization", "Bias-Variance", "Cross-Validation", "Ensemble Methods", "Kernels"]
+  },
+  "questions": [
+    {
+      "id": 1,
+      "topic": "Linear Regression",
+      "question": "In Ordinary Least Squares (OLS), the closed-form solution for the coefficient estimator β̂ is:",
+      "question_fr": "Dans les Moindres Carrés Ordinaires (MCO), la solution analytique pour l'estimateur des coefficients β̂ est :",
+      "options": ["β̂ = (XᵀX)⁻¹Xᵀy", "β̂ = X(XᵀX)⁻¹y", "β̂ = Xᵀ(XXᵀ)⁻¹y", "β̂ = (XXᵀ)⁻¹Xy"],
+      "correct": 0,
+      "explanation": "The OLS estimator is derived by setting the gradient of RSS(β) = (y - Xβ)ᵀ(y - Xβ) to zero. This yields the normal equations XᵀXβ = Xᵀy, which when solved gives β̂ = (XᵀX)⁻¹Xᵀy, assuming XᵀX is invertible.",
+      "explanation_fr": "L'estimateur MCO est dérivé en mettant le gradient de RSS(β) = (y - Xβ)ᵀ(y - Xβ) à zéro. Cela donne les équations normales XᵀXβ = Xᵀy, qui résolues donnent β̂ = (XᵀX)⁻¹Xᵀy, en supposant XᵀX inversible."
+    },
+    {
+      "id": 2,
+      "topic": "Linear Regression",
+      "question": "What happens to the variance of OLS coefficient estimates when XᵀX has eigenvalues close to zero?",
+      "question_fr": "Que se passe-t-il pour la variance des estimateurs MCO quand XᵀX a des valeurs propres proches de zéro ?",
+      "options": ["Variance becomes very large", "Variance approaches zero", "Variance equals σ²", "Variance is undefined"],
+      "correct": 0,
+      "explanation": "When XᵀX has eigenvalues close to zero (near-singular), its inverse (XᵀX)⁻¹ has very large eigenvalues. Since Var(β̂) = σ²(XᵀX)⁻¹, this causes the variance of the coefficients to become very large, leading to unstable estimates.",
+      "explanation_fr": "Quand XᵀX a des valeurs propres proches de zéro (quasi-singulière), son inverse (XᵀX)⁻¹ a de très grandes valeurs propres. Comme Var(β̂) = σ²(XᵀX)⁻¹, cela rend la variance des coefficients très grande."
+    },
+    {
+      "id": 3,
+      "topic": "Linear Regression",
+      "question": "Multicollinearity in linear regression refers to:",
+      "question_fr": "La multicolinéarité en régression linéaire fait référence à :",
+      "options": ["High correlation among predictors", "Non-linear relationships", "Heteroscedastic errors", "Autocorrelated residuals"],
+      "correct": 0,
+      "explanation": "Multicollinearity occurs when predictor variables are highly correlated with each other. This makes XᵀX nearly singular, inflating the variance of coefficient estimates and making them unreliable. It doesn't affect predictions but impacts interpretability.",
+      "explanation_fr": "La multicolinéarité survient quand les variables prédictives sont fortement corrélées entre elles. Cela rend XᵀX quasi-singulière, augmentant la variance des estimateurs."
+    },
+    {
+      "id": 4,
+      "topic": "Linear Regression",
+      "question": "The Residual Sum of Squares (RSS) measures:",
+      "question_fr": "La Somme des Carrés des Résidus (RSS) mesure :",
+      "options": ["Sum of squared differences between observed and predicted values", "Sum of squared predictions", "Variance of predictors", "Covariance between Y and X"],
+      "correct": 0,
+      "explanation": "RSS = Σᵢ(yᵢ - ŷᵢ)² measures the total squared deviation between actual observations and model predictions. Minimizing RSS is the objective of OLS, which is equivalent to empirical risk minimization with square loss.",
+      "explanation_fr": "RSS = Σᵢ(yᵢ - ŷᵢ)² mesure la déviation quadratique totale entre les observations réelles et les prédictions du modèle. Minimiser RSS est l'objectif des MCO."
+    },
+    {
+      "id": 5,
+      "topic": "Linear Regression",
+      "question": "In the context of linear regression, what does 'overparametrisation' mean?",
+      "question_fr": "Dans le contexte de la régression linéaire, que signifie 'surparamétrisation' ?",
+      "options": ["Number of predictors p is close to or exceeds n", "Too few predictors", "Missing intercept term", "Non-normal errors"],
+      "correct": 0,
+      "explanation": "Overparametrisation occurs when the number of predictors p is close to, equal to, or larger than the number of observations n. This makes XᵀX nearly singular or non-invertible, leading to infinite variance in coefficient estimates.",
+      "explanation_fr": "La surparamétrisation se produit quand le nombre de prédicteurs p est proche, égal ou supérieur au nombre d'observations n."
+    },
+    {
+      "id": 6,
+      "topic": "Bias-Variance Tradeoff",
+      "question": "The expected squared error of a new sample can be decomposed into:",
+      "question_fr": "L'erreur quadratique attendue d'un nouvel échantillon peut être décomposée en :",
+      "options": ["Squared bias + Variance + Irreducible error", "Bias + Variance", "Reducible error only", "Training error + Test error"],
+      "correct": 0,
+      "explanation": "E[(Y - f̂(X))²] = Bias²(f̂) + Var(f̂) + σ². The first two terms form the reducible error (which can be reduced by choosing better models), while σ² is the irreducible error from noise in the data.",
+      "explanation_fr": "E[(Y - f̂(X))²] = Biais²(f̂) + Var(f̂) + σ². Les deux premiers termes forment l'erreur réductible, tandis que σ² est l'erreur irréductible du bruit."
+    },
+    {
+      "id": 7,
+      "topic": "Bias-Variance Tradeoff",
+      "question": "Which statement about the irreducible error is FALSE?",
+      "question_fr": "Quelle affirmation sur l'erreur irréductible est FAUSSE ?",
+      "options": ["It can be reduced with more data", "It represents noise variance σ²", "It cannot be eliminated by any model", "It sets a lower bound on prediction error"],
+      "correct": 0,
+      "explanation": "The irreducible error σ² cannot be reduced even with more training data - it represents the inherent noise in the data-generating process. Only obtaining more information about the relationship could potentially reduce it.",
+      "explanation_fr": "L'erreur irréductible σ² ne peut pas être réduite même avec plus de données d'entraînement - elle représente le bruit inhérent au processus de génération des données."
+    },
+    {
+      "id": 8,
+      "topic": "Bias-Variance Tradeoff",
+      "question": "A model with high bias typically exhibits:",
+      "question_fr": "Un modèle avec un biais élevé présente typiquement :",
+      "options": ["Underfitting", "Overfitting", "Perfect fit", "High variance"],
+      "correct": 0,
+      "explanation": "High bias means the model makes strong assumptions that don't capture the true relationship - this leads to underfitting. The model is too simple to capture the complexity in the data, resulting in poor performance on both training and test sets.",
+      "explanation_fr": "Un biais élevé signifie que le modèle fait des hypothèses fortes qui ne capturent pas la vraie relation - cela conduit au sous-ajustement."
+    },
+    {
+      "id": 9,
+      "topic": "Bias-Variance Tradeoff",
+      "question": "For k-Nearest Neighbors, what happens to bias and variance as k increases?",
+      "question_fr": "Pour k plus proches voisins, que se passe-t-il pour le biais et la variance quand k augmente ?",
+      "options": ["Bias increases, variance decreases", "Both increase", "Both decrease", "Bias decreases, variance increases"],
+      "correct": 0,
+      "explanation": "As k increases, the model averages over more neighbors, creating a smoother decision boundary. This reduces variance (less sensitive to individual data points) but increases bias (may miss local patterns).",
+      "explanation_fr": "Quand k augmente, le modèle moyenne sur plus de voisins, créant une frontière de décision plus lisse. Cela réduit la variance mais augmente le biais."
+    },
+    {
+      "id": 10,
+      "topic": "Bias-Variance Tradeoff",
+      "question": "Overfitting is characterized by:",
+      "question_fr": "Le sur-ajustement est caractérisé par :",
+      "options": ["Low training error, high validation error", "High training error, low validation error", "Both errors are high", "Both errors are low"],
+      "correct": 0,
+      "explanation": "Overfitting occurs when a model learns the noise in the training data. This results in excellent performance on training data (low error) but poor generalization to new data (high validation error).",
+      "explanation_fr": "Le sur-ajustement se produit quand un modèle apprend le bruit des données d'entraînement, donnant une faible erreur d'entraînement mais une haute erreur de validation."
+    },
+    {
+      "id": 11,
+      "topic": "Cross-Validation",
+      "question": "In K-fold cross-validation, what fraction of data is used for training in each fold?",
+      "question_fr": "En validation croisée K-fold, quelle fraction des données est utilisée pour l'entraînement à chaque fold ?",
+      "options": ["(K-1)/K", "1/K", "K/(K+1)", "K-1"],
+      "correct": 0,
+      "explanation": "In K-fold CV, data is split into K equal folds. For each iteration, K-1 folds are used for training and 1 fold for validation. Thus, the training fraction is (K-1)/K. For K=5, this is 80%; for K=10, this is 90%.",
+      "explanation_fr": "En CV K-fold, les données sont divisées en K parties égales. Pour chaque itération, K-1 parties sont utilisées pour l'entraînement. La fraction d'entraînement est (K-1)/K."
+    },
+    {
+      "id": 12,
+      "topic": "Cross-Validation",
+      "question": "What is a key advantage of K-fold CV over a single train/validation split?",
+      "question_fr": "Quel est un avantage clé de la CV K-fold par rapport à une division unique train/validation ?",
+      "options": ["Reduces variance of performance estimate", "Uses less computation", "Always gives higher accuracy", "Requires less data"],
+      "correct": 0,
+      "explanation": "K-fold CV averages performance over K different train/validation splits, reducing the variance of the performance estimate. A single split can give misleading results depending on which data points end up in which set.",
+      "explanation_fr": "La CV K-fold moyenne les performances sur K divisions différentes, réduisant la variance de l'estimation de performance."
+    },
+    {
+      "id": 13,
+      "topic": "Cross-Validation",
+      "question": "After selecting a model via cross-validation, what should you do before deployment?",
+      "question_fr": "Après avoir sélectionné un modèle via validation croisée, que devez-vous faire avant le déploiement ?",
+      "options": ["Retrain on all available data", "Use only the last fold's model", "Average all K models", "Discard the training data"],
+      "correct": 0,
+      "explanation": "After selecting the best model/hyperparameters via CV, you should retrain that model on ALL available data. The CV models were only trained on (K-1)/K of the data; retraining on 100% gives a better final model.",
+      "explanation_fr": "Après avoir sélectionné le meilleur modèle via CV, vous devez réentraîner ce modèle sur TOUTES les données disponibles."
+    },
+    {
+      "id": 14,
+      "topic": "Cross-Validation",
+      "question": "Leave-One-Out Cross-Validation (LOOCV) corresponds to K-fold CV with:",
+      "question_fr": "La validation croisée Leave-One-Out (LOOCV) correspond à la CV K-fold avec :",
+      "options": ["K = n (sample size)", "K = 2", "K = 10", "K = sqrt(n)"],
+      "correct": 0,
+      "explanation": "LOOCV uses K = n, where each fold contains exactly one sample. Each model is trained on n-1 samples and tested on 1. This gives an almost unbiased estimate but is computationally expensive and has high variance.",
+      "explanation_fr": "LOOCV utilise K = n, où chaque fold contient exactement un échantillon. Chaque modèle est entraîné sur n-1 échantillons."
+    },
+    {
+      "id": 15,
+      "topic": "Regularization",
+      "question": "Ridge regression adds which penalty term to the OLS objective?",
+      "question_fr": "La régression Ridge ajoute quel terme de pénalité à l'objectif MCO ?",
+      "options": ["λ||β||₂²", "λ||β||₁", "λ||β||∞", "λ/||β||₂"],
+      "correct": 0,
+      "explanation": "Ridge regression (L2 regularization) adds λΣβⱼ² = λ||β||₂² to the RSS. This penalizes large coefficients, shrinking them toward zero but never exactly to zero, which helps with multicollinearity.",
+      "explanation_fr": "La régression Ridge (régularisation L2) ajoute λΣβⱼ² = λ||β||₂² au RSS. Cela pénalise les grands coefficients en les réduisant vers zéro."
+    },
+    {
+      "id": 16,
+      "topic": "Regularization",
+      "question": "LASSO regression encourages sparsity because:",
+      "question_fr": "La régression LASSO encourage la parcimonie parce que :",
+      "options": ["L1 penalty geometry causes exact zeros", "L2 penalty is continuous", "It uses gradient descent", "It minimizes variance"],
+      "correct": 0,
+      "explanation": "LASSO uses the L1 penalty λ||β||₁ = λΣ|βⱼ|. Due to the geometry of the L1 ball (diamond-shaped), the optimal solution often lies at a corner where some coefficients are exactly zero, enabling automatic feature selection.",
+      "explanation_fr": "LASSO utilise la pénalité L1 λ||β||₁. En raison de la géométrie de la boule L1 (forme de diamant), la solution optimale se trouve souvent à un coin où certains coefficients sont exactement zéro."
+    },
+    {
+      "id": 17,
+      "topic": "Regularization",
+      "question": "What is NOT a direct effect of increasing the regularization parameter λ in Ridge regression?",
+      "question_fr": "Qu'est-ce qui N'EST PAS un effet direct de l'augmentation du paramètre de régularisation λ en Ridge ?",
+      "options": ["Increasing model capacity", "Reducing variance", "Increasing bias", "Shrinking coefficients"],
+      "correct": 0,
+      "explanation": "Increasing λ DECREASES model capacity (complexity) by more strongly constraining the coefficients. This reduces variance but increases bias. It does NOT increase capacity - that's the opposite of what regularization does.",
+      "explanation_fr": "Augmenter λ DIMINUE la capacité du modèle en contraignant plus fortement les coefficients. Cela réduit la variance mais augmente le biais."
+    },
+    {
+      "id": 18,
+      "topic": "Regularization",
+      "question": "When λ → ∞ in Ridge regression, the coefficients approach:",
+      "question_fr": "Quand λ → ∞ en régression Ridge, les coefficients approchent :",
+      "options": ["Zero", "Infinity", "OLS estimates", "One"],
+      "correct": 0,
+      "explanation": "As λ → ∞, the penalty term dominates, and minimizing ||β||₂² means all coefficients approach zero. The model becomes increasingly biased (toward zero) but has minimal variance.",
+      "explanation_fr": "Quand λ → ∞, le terme de pénalité domine, et minimiser ||β||₂² signifie que tous les coefficients approchent zéro."
+    },
+    {
+      "id": 19,
+      "topic": "Regularization",
+      "question": "If you know only a sparse subset of features is truly predictive, which regularization should you prefer?",
+      "question_fr": "Si vous savez que seul un sous-ensemble parcimonieux de features est vraiment prédictif, quelle régularisation préférer ?",
+      "options": ["L1 (LASSO)", "L2 (Ridge)", "No regularization", "L∞ norm"],
+      "correct": 0,
+      "explanation": "L1 regularization (LASSO) is preferred when sparsity is expected because it can set irrelevant coefficients exactly to zero. Ridge shrinks all coefficients but keeps them non-zero, which doesn't achieve sparsity.",
+      "explanation_fr": "La régularisation L1 (LASSO) est préférée quand on attend de la parcimonie car elle peut mettre les coefficients non pertinents exactement à zéro."
+    },
+    {
+      "id": 20,
+      "topic": "Regularization",
+      "question": "The Elastic Net penalty combines:",
+      "question_fr": "La pénalité Elastic Net combine :",
+      "options": ["L1 and L2 penalties", "L1 and L∞ penalties", "Only L2 penalty", "Squared loss and hinge loss"],
+      "correct": 0,
+      "explanation": "Elastic Net uses λ₁||β||₁ + λ₂||β||₂², combining LASSO's sparsity-inducing property with Ridge's stability for correlated features. This is useful when features are correlated and you want some automatic selection.",
+      "explanation_fr": "Elastic Net utilise λ₁||β||₁ + λ₂||β||₂², combinant la propriété de parcimonie de LASSO avec la stabilité de Ridge pour les features corrélées."
+    },
+    {
+      "id": 21,
+      "topic": "Logistic Regression",
+      "question": "Logistic regression models the probability P(Y=1|X) using which function?",
+      "question_fr": "La régression logistique modélise la probabilité P(Y=1|X) en utilisant quelle fonction ?",
+      "options": ["Sigmoid/logistic function", "Linear function", "Polynomial function", "Step function"],
+      "correct": 0,
+      "explanation": "Logistic regression uses the sigmoid function σ(z) = 1/(1+e⁻ᶻ) where z = βᵀx. This maps the linear combination to [0,1], ensuring valid probabilities. The output is P(Y=1|X) = σ(βᵀX).",
+      "explanation_fr": "La régression logistique utilise la fonction sigmoïde σ(z) = 1/(1+e⁻ᶻ) où z = βᵀx, mappant la combinaison linéaire à [0,1]."
+    },
+    {
+      "id": 22,
+      "topic": "Logistic Regression",
+      "question": "The loss function used in logistic regression is:",
+      "question_fr": "La fonction de perte utilisée en régression logistique est :",
+      "options": ["Cross-entropy loss", "Square loss", "Hinge loss", "Huber loss"],
+      "correct": 0,
+      "explanation": "Logistic regression minimizes cross-entropy loss: -Σ[yᵢlog(pᵢ) + (1-yᵢ)log(1-pᵢ)]. This is equivalent to maximum likelihood estimation and is derived from the negative log-likelihood of the Bernoulli distribution.",
+      "explanation_fr": "La régression logistique minimise la perte d'entropie croisée: -Σ[yᵢlog(pᵢ) + (1-yᵢ)log(1-pᵢ)]."
+    },
+    {
+      "id": 23,
+      "topic": "Logistic Regression",
+      "question": "Unlike linear regression, logistic regression coefficients are found using:",
+      "question_fr": "Contrairement à la régression linéaire, les coefficients de la régression logistique sont trouvés en utilisant :",
+      "options": ["Iterative optimization (gradient descent)", "Closed-form solution", "Matrix inversion", "Eigenvalue decomposition"],
+      "correct": 0,
+      "explanation": "The cross-entropy loss for logistic regression has no closed-form solution. We must use iterative optimization methods like gradient descent, Newton's method, or other optimizers to find the optimal coefficients.",
+      "explanation_fr": "La perte d'entropie croisée n'a pas de solution analytique. On doit utiliser des méthodes d'optimisation itératives comme la descente de gradient."
+    },
+    {
+      "id": 24,
+      "topic": "Logistic Regression",
+      "question": "In logistic regression, the log-odds (logit) is modeled as:",
+      "question_fr": "En régression logistique, le log-odds (logit) est modélisé comme :",
+      "options": ["A linear function of predictors", "A quadratic function", "An exponential function", "A sigmoid function"],
+      "correct": 0,
+      "explanation": "Logistic regression assumes log(P/(1-P)) = βᵀX, making the log-odds a linear function of the predictors. This is why it's called a 'generalized linear model' - the link function transforms the linear predictor.",
+      "explanation_fr": "La régression logistique suppose log(P/(1-P)) = βᵀX, rendant le log-odds une fonction linéaire des prédicteurs."
+    },
+    {
+      "id": 25,
+      "topic": "Logistic Regression",
+      "question": "Which feature engineering technique is LEAST likely to improve logistic regression performance?",
+      "question_fr": "Quelle technique d'ingénierie des features est la MOINS susceptible d'améliorer les performances de la régression logistique ?",
+      "options": ["Adding irrelevant correlated features", "Adding polynomial terms", "Creating interaction terms", "Standardizing features"],
+      "correct": 0,
+      "explanation": "Adding irrelevant features that are correlated increases multicollinearity without adding predictive power. This can destabilize coefficient estimates. Polynomial terms, interactions, and standardization can genuinely help.",
+      "explanation_fr": "Ajouter des features non pertinentes corrélées augmente la multicolinéarité sans ajouter de pouvoir prédictif."
+    },
+    {
+      "id": 26,
+      "topic": "Decision Trees",
+      "question": "The entropy of a node with class proportions (0.5, 0.5) is:",
+      "question_fr": "L'entropie d'un noeud avec des proportions de classes (0.5, 0.5) est :",
+      "options": ["1 bit", "0 bits", "0.5 bits", "2 bits"],
+      "correct": 0,
+      "explanation": "Entropy H = -Σpᵢlog₂(pᵢ) = -0.5×log₂(0.5) - 0.5×log₂(0.5) = -0.5×(-1) - 0.5×(-1) = 1 bit. This is maximum entropy for binary classification, representing maximum uncertainty.",
+      "explanation_fr": "Entropie H = -Σpᵢlog₂(pᵢ) = -0.5×log₂(0.5) - 0.5×log₂(0.5) = 1 bit. C'est l'entropie maximale pour la classification binaire."
+    },
+    {
+      "id": 27,
+      "topic": "Decision Trees",
+      "question": "The entropy of a pure node (all samples same class) is:",
+      "question_fr": "L'entropie d'un noeud pur (tous les échantillons de la même classe) est :",
+      "options": ["0", "1", "0.5", "Infinity"],
+      "correct": 0,
+      "explanation": "For a pure node with p₁=1 and p₂=0: H = -1×log₂(1) - 0×log₂(0) = 0 (using the convention 0×log(0)=0). Zero entropy means no uncertainty - we know exactly which class all samples belong to.",
+      "explanation_fr": "Pour un noeud pur avec p₁=1: H = -1×log₂(1) = 0. Zéro entropie signifie pas d'incertitude."
+    },
+    {
+      "id": 28,
+      "topic": "Decision Trees",
+      "question": "Information gain is calculated as:",
+      "question_fr": "Le gain d'information est calculé comme :",
+      "options": ["Parent entropy minus weighted child entropies", "Child entropy minus parent entropy", "Sum of all entropies", "Product of entropies"],
+      "correct": 0,
+      "explanation": "Information Gain = H(parent) - Σᵢ(wᵢ × H(childᵢ)), where wᵢ is the proportion of samples going to child i. We choose the split that maximizes this gain, meaning we reduce entropy the most.",
+      "explanation_fr": "Gain d'Information = H(parent) - Σᵢ(wᵢ × H(enfantᵢ)), où wᵢ est la proportion d'échantillons allant à l'enfant i."
+    },
+    {
+      "id": 29,
+      "topic": "Decision Trees",
+      "question": "The Gini impurity for a binary classification with proportions (p, 1-p) is:",
+      "question_fr": "L'impureté de Gini pour une classification binaire avec proportions (p, 1-p) est :",
+      "options": ["2p(1-p)", "p log(p)", "-p log(p) - (1-p)log(1-p)", "p² + (1-p)²"],
+      "correct": 0,
+      "explanation": "Gini = Σpᵢ(1-pᵢ) = p(1-p) + (1-p)(p) = 2p(1-p). It represents the probability of misclassifying a randomly chosen sample if labeled according to the class distribution in that node.",
+      "explanation_fr": "Gini = Σpᵢ(1-pᵢ) = 2p(1-p). Il représente la probabilité de mal classifier un échantillon choisi aléatoirement."
+    },
+    {
+      "id": 30,
+      "topic": "Decision Trees",
+      "question": "Which statement about decision trees is INCORRECT?",
+      "question_fr": "Quelle affirmation sur les arbres de décision est INCORRECTE ?",
+      "options": ["Features with more unique values are always preferred", "Trees use greedy local optimization", "The same feature can be used multiple times", "Feature scaling is not required"],
+      "correct": 0,
+      "explanation": "Features with more unique values are NOT always preferred. While they offer more split options, this can lead to overfitting. Trees choose splits based on information gain or Gini, not the number of unique values.",
+      "explanation_fr": "Les features avec plus de valeurs uniques ne sont PAS toujours préférées. Cela peut mener au sur-ajustement."
+    },
+    {
+      "id": 31,
+      "topic": "Decision Trees",
+      "question": "Pre-pruning a decision tree means:",
+      "question_fr": "Le pré-élagage d'un arbre de décision signifie :",
+      "options": ["Stopping growth early based on criteria", "Removing branches after full growth", "Growing multiple trees", "Using only leaf nodes"],
+      "correct": 0,
+      "explanation": "Pre-pruning stops tree growth before it's complete, using criteria like minimum information gain, maximum depth, or minimum samples per node. This prevents overfitting but may miss useful splits deeper in the tree.",
+      "explanation_fr": "Le pré-élagage arrête la croissance de l'arbre avant qu'il soit complet, en utilisant des critères comme le gain d'information minimum."
+    },
+    {
+      "id": 32,
+      "topic": "Decision Trees",
+      "question": "In which scenario would post-pruning be LESS effective?",
+      "question_fr": "Dans quel scénario le post-élagage serait-il MOINS efficace ?",
+      "options": ["When the tree is already shallow", "When many irrelevant features exist", "When features are correlated", "When using cost complexity pruning"],
+      "correct": 0,
+      "explanation": "Post-pruning removes branches from a fully-grown tree. If the tree is already shallow, there are few branches to prune, making the technique less effective. Post-pruning works best on deep, overfitted trees.",
+      "explanation_fr": "Le post-élagage supprime des branches d'un arbre complètement développé. Si l'arbre est déjà peu profond, il y a peu de branches à élaguer."
+    },
+    {
+      "id": 33,
+      "topic": "Decision Trees",
+      "question": "For a numerical feature, decision trees typically consider splits of the form:",
+      "question_fr": "Pour une feature numérique, les arbres de décision considèrent typiquement des divisions de la forme :",
+      "options": ["x ≤ threshold vs x > threshold", "x = value", "x in {values}", "x mod k = 0"],
+      "correct": 0,
+      "explanation": "For numerical features, trees consider binary splits x ≤ c vs x > c, where c is typically a midpoint between consecutive sorted values. All possible thresholds are evaluated to find the one with maximum information gain.",
+      "explanation_fr": "Pour les features numériques, les arbres considèrent des divisions binaires x ≤ c vs x > c, où c est un seuil entre valeurs consécutives triées."
+    },
+    {
+      "id": 34,
+      "topic": "Decision Trees",
+      "question": "Regression trees predict using:",
+      "question_fr": "Les arbres de régression prédisent en utilisant :",
+      "options": ["Mean of training samples in the leaf", "Majority vote", "Median of samples", "Sum of samples"],
+      "correct": 0,
+      "explanation": "Regression trees predict the mean of the training sample outcomes in the leaf node. The purity measure is typically Mean Squared Error (MSE) rather than entropy or Gini used in classification.",
+      "explanation_fr": "Les arbres de régression prédisent la moyenne des résultats des échantillons d'entraînement dans la feuille."
+    },
+    {
+      "id": 35,
+      "topic": "Decision Trees",
+      "question": "The XOR function example demonstrates that stopping tree growth based on zero information gain:",
+      "question_fr": "L'exemple de la fonction XOR démontre que l'arrêt de la croissance de l'arbre basé sur un gain d'information nul :",
+      "options": ["May miss perfect classifiers deeper in the tree", "Is always optimal", "Prevents overfitting completely", "Works well for all problems"],
+      "correct": 0,
+      "explanation": "For XOR, neither X₁ nor X₂ alone provides information gain at the root. But splitting on one then the other achieves perfect classification. Stopping early due to zero IG misses this opportunity.",
+      "explanation_fr": "Pour XOR, ni X₁ ni X₂ seul ne fournit de gain d'information à la racine. Mais diviser sur l'un puis l'autre atteint une classification parfaite."
+    },
+    {
+      "id": 36,
+      "topic": "Random Forests",
+      "question": "Random forests reduce variance compared to single decision trees by:",
+      "question_fr": "Les forêts aléatoires réduisent la variance par rapport aux arbres de décision individuels en :",
+      "options": ["Averaging predictions from multiple trees", "Using deeper trees", "Removing features", "Training on more data"],
+      "correct": 0,
+      "explanation": "Random forests use ensemble averaging: train B trees on bootstrapped samples and average their predictions (regression) or take majority vote (classification). Averaging independent estimators reduces variance by factor ~B.",
+      "explanation_fr": "Les forêts aléatoires utilisent la moyenne d'ensemble : entraîner B arbres sur des échantillons bootstrap et moyenner leurs prédictions."
+    },
+    {
+      "id": 37,
+      "topic": "Random Forests",
+      "question": "Bagging refers to:",
+      "question_fr": "Le bagging fait référence à :",
+      "options": ["Bootstrap aggregating", "Backward aggregating", "Batch gradient", "Binary aggregating"],
+      "correct": 0,
+      "explanation": "Bagging = Bootstrap AGGregatING. Each tree is trained on a bootstrap sample (random sample with replacement of size n from n samples). This introduces diversity among trees, which is essential for variance reduction.",
+      "explanation_fr": "Bagging = Bootstrap AGGregatING. Chaque arbre est entraîné sur un échantillon bootstrap (échantillon aléatoire avec remplacement)."
+    },
+    {
+      "id": 38,
+      "topic": "Random Forests",
+      "question": "In random forests, at each split, how many features are typically considered?",
+      "question_fr": "Dans les forêts aléatoires, à chaque division, combien de features sont typiquement considérées ?",
+      "options": ["A random subset (e.g., √p for classification)", "All features", "Only one feature", "Half the features"],
+      "correct": 0,
+      "explanation": "Random forests randomly select m features at each split (typically m = √p for classification, m = p/3 for regression). This decorrelates trees, improving variance reduction beyond what bagging alone achieves.",
+      "explanation_fr": "Les forêts aléatoires sélectionnent aléatoirement m features à chaque division (typiquement m = √p pour la classification)."
+    },
+    {
+      "id": 39,
+      "topic": "Random Forests",
+      "question": "What is most likely to cause overfitting in a random forest?",
+      "question_fr": "Qu'est-ce qui est le plus susceptible de causer du sur-ajustement dans une forêt aléatoire ?",
+      "options": ["Low minimum samples per leaf", "More trees", "Fewer features per split", "Shallow trees"],
+      "correct": 0,
+      "explanation": "Low minimum samples per leaf allows trees to grow very deep, fitting to noise. More trees generally help (or don't hurt). Fewer features per split and shallow trees both reduce overfitting by adding constraints.",
+      "explanation_fr": "Un faible nombre minimum d'échantillons par feuille permet aux arbres de devenir très profonds, s'ajustant au bruit."
+    },
+    {
+      "id": 40,
+      "topic": "Random Forests",
+      "question": "Feature importance in random forests for correlated features:",
+      "question_fr": "L'importance des features dans les forêts aléatoires pour des features corrélées :",
+      "options": ["May be distributed among the correlated features", "Is always split evenly", "Goes entirely to one feature", "Is automatically adjusted for correlation"],
+      "correct": 0,
+      "explanation": "Correlated features compete for splits. Their importance gets distributed unpredictably among them - one tree might use feature A, another uses B. This makes interpreting individual feature importance difficult for correlated features.",
+      "explanation_fr": "Les features corrélées sont en compétition pour les divisions. Leur importance est distribuée de façon imprévisible entre elles."
+    },
+    {
+      "id": 41,
+      "topic": "Random Forests",
+      "question": "Which statement about random forests interpretability is FALSE?",
+      "question_fr": "Quelle affirmation sur l'interprétabilité des forêts aléatoires est FAUSSE ?",
+      "options": ["Gradient boosted trees are interpretable because they reveal each tree's importance", "Individual trees are interpretable", "The ensemble is harder to interpret", "Feature importance provides some insight"],
+      "correct": 0,
+      "explanation": "Gradient boosted trees are NOT inherently interpretable just because they're sequential. While we can compute feature importance, the additive model of many weak learners is complex. Individual predictions remain hard to explain.",
+      "explanation_fr": "Les arbres à gradient boosting ne sont PAS intrinsèquement interprétables juste parce qu'ils sont séquentiels."
+    },
+    {
+      "id": 42,
+      "topic": "Random Forests",
+      "question": "The correlation between trees in a bagged ensemble affects variance reduction because:",
+      "question_fr": "La corrélation entre les arbres dans un ensemble baggé affecte la réduction de variance parce que :",
+      "options": ["Higher correlation means less variance reduction", "Correlation has no effect", "Higher correlation improves reduction", "Correlation only affects bias"],
+      "correct": 0,
+      "explanation": "For n correlated estimators with pairwise correlation ρ, averaging reduces variance to σ²[ρ + (1-ρ)/n] instead of σ²/n. Higher ρ means less variance reduction. Random forests use random feature selection to reduce ρ.",
+      "explanation_fr": "Pour n estimateurs corrélés avec corrélation ρ, la moyenne réduit la variance à σ²[ρ + (1-ρ)/n]. Plus ρ est élevé, moins la variance est réduite."
+    },
+    {
+      "id": 43,
+      "topic": "K-Means",
+      "question": "The K-means algorithm iterates between which two steps?",
+      "question_fr": "L'algorithme K-means itère entre quelles deux étapes ?",
+      "options": ["Assign points to nearest centroid, Update centroids", "Split clusters, Merge clusters", "Add points, Remove points", "Increase K, Decrease K"],
+      "correct": 0,
+      "explanation": "K-means alternates: (1) Assignment step - assign each point to the nearest centroid, (2) Update step - recompute centroids as the mean of assigned points. This continues until convergence (assignments don't change).",
+      "explanation_fr": "K-means alterne : (1) Étape d'assignation - assigner chaque point au centroïde le plus proche, (2) Étape de mise à jour - recalculer les centroïdes."
+    },
+    {
+      "id": 44,
+      "topic": "K-Means",
+      "question": "K-means clustering minimizes:",
+      "question_fr": "Le clustering K-means minimise :",
+      "options": ["Within-cluster sum of squared distances", "Between-cluster variance", "Number of clusters", "Euclidean distance between centroids"],
+      "correct": 0,
+      "explanation": "K-means minimizes the within-cluster sum of squares (WCSS): Σₖ Σₓ∈Cₖ ||x - μₖ||². This measures how compact the clusters are - lower WCSS means tighter clusters around their centroids.",
+      "explanation_fr": "K-means minimise la somme des carrés intra-cluster (WCSS) : Σₖ Σₓ∈Cₖ ||x - μₖ||²."
+    },
+    {
+      "id": 45,
+      "topic": "K-Means",
+      "question": "The Elbow Method for choosing K looks for:",
+      "question_fr": "La méthode du coude pour choisir K recherche :",
+      "options": ["A 'kink' where WCSS reduction slows significantly", "The K with highest WCSS", "K = number of samples", "Maximum distance between clusters"],
+      "correct": 0,
+      "explanation": "Plot WCSS vs K. As K increases, WCSS decreases (more clusters = tighter fit). The 'elbow' is where adding more clusters gives diminishing returns - WCSS reduction slows significantly. This suggests optimal K.",
+      "explanation_fr": "Tracer WCSS vs K. Le 'coude' est là où l'ajout de plus de clusters donne des rendements décroissants."
+    },
+    {
+      "id": 46,
+      "topic": "K-Means",
+      "question": "If there's no clear elbow in the WCSS plot, what might this indicate?",
+      "question_fr": "S'il n'y a pas de coude clair dans le graphique WCSS, que pourrait indiquer ceci ?",
+      "options": ["Data may lack well-defined cluster structure", "K-means has not converged", "You need more iterations", "K must equal n"],
+      "correct": 0,
+      "explanation": "No clear elbow suggests the data might not have a natural cluster structure, or clusters overlap significantly. In this case, hierarchical clustering or other methods might provide more insight into the data structure.",
+      "explanation_fr": "Pas de coude clair suggère que les données pourraient ne pas avoir une structure de clusters naturelle."
+    },
+    {
+      "id": 47,
+      "topic": "K-Means",
+      "question": "Min-max normalization transforms a feature x to the range [0,1] using:",
+      "question_fr": "La normalisation min-max transforme une feature x dans l'intervalle [0,1] en utilisant :",
+      "options": ["(x - min)/(max - min)", "(x - mean)/std", "x/max", "log(x)"],
+      "correct": 0,
+      "explanation": "Min-max normalization: x_norm = (x - x_min)/(x_max - x_min). This scales values to [0,1] while preserving relationships. It's sensitive to outliers since min and max are used.",
+      "explanation_fr": "Normalisation min-max : x_norm = (x - x_min)/(x_max - x_min). Cela met les valeurs à l'échelle [0,1]."
+    },
+    {
+      "id": 48,
+      "topic": "K-Means",
+      "question": "When adding a new point to existing K-means clusters, you should:",
+      "question_fr": "Quand vous ajoutez un nouveau point à des clusters K-means existants, vous devez :",
+      "options": ["Apply the same transformation, then assign to nearest centroid", "Rerun K-means from scratch", "Create a new cluster", "Ignore normalization"],
+      "correct": 0,
+      "explanation": "Apply the same normalization (using the original min/max values) to the new point, then assign it to the nearest existing centroid. You may optionally update centroids afterward if online learning is desired.",
+      "explanation_fr": "Appliquer la même transformation au nouveau point, puis l'assigner au centroïde le plus proche."
+    },
+    {
+      "id": 49,
+      "topic": "K-Means",
+      "question": "K-means is sensitive to initialization because:",
+      "question_fr": "K-means est sensible à l'initialisation parce que :",
+      "options": ["It can converge to different local minima", "It finds the global minimum", "Initialization doesn't matter", "It uses random features"],
+      "correct": 0,
+      "explanation": "K-means is a greedy algorithm that converges to a local minimum of WCSS. Different initializations can lead to different local minima, some much worse than others. K-means++ provides better initialization.",
+      "explanation_fr": "K-means est un algorithme glouton qui converge vers un minimum local de WCSS. Différentes initialisations peuvent mener à différents minima locaux."
+    },
+    {
+      "id": 50,
+      "topic": "Hierarchical Clustering",
+      "question": "Complete linkage in hierarchical clustering measures cluster distance as:",
+      "question_fr": "La liaison complète en clustering hiérarchique mesure la distance entre clusters comme :",
+      "options": ["Maximum distance between any two points in different clusters", "Minimum distance", "Average distance", "Distance between centroids"],
+      "correct": 0,
+      "explanation": "Complete linkage = max distance between any pair of points from the two clusters. It tends to produce compact, spherical clusters. Single linkage uses min (prone to chaining), average uses mean.",
+      "explanation_fr": "Liaison complète = distance max entre toute paire de points des deux clusters. Elle tend à produire des clusters compacts et sphériques."
+    },
+    {
+      "id": 51,
+      "topic": "KNN",
+      "question": "In K-Nearest Neighbors classification, the prediction is made by:",
+      "question_fr": "En classification K plus proches voisins, la prédiction est faite par :",
+      "options": ["Majority vote among K neighbors", "Average of K neighbors", "Nearest neighbor only", "Weighted random selection"],
+      "correct": 0,
+      "explanation": "KNN classification takes a majority vote among the K nearest neighbors. For regression, it takes the mean of the K neighbors' values. Distance weighting can also be applied for more sophisticated predictions.",
+      "explanation_fr": "La classification KNN prend un vote majoritaire parmi les K voisins les plus proches."
+    },
+    {
+      "id": 52,
+      "topic": "KNN",
+      "question": "The curse of dimensionality affects KNN by:",
+      "question_fr": "La malédiction de la dimensionnalité affecte KNN en :",
+      "options": ["Making distances less informative", "Speeding up computation", "Reducing the need for neighbors", "Improving accuracy"],
+      "correct": 0,
+      "explanation": "In high dimensions, distances between points become similar (concentrate around the mean). This makes nearest neighbors less meaningful - all points appear roughly equidistant. KNN performance degrades significantly.",
+      "explanation_fr": "En haute dimension, les distances entre points deviennent similaires. Cela rend les voisins les plus proches moins significatifs."
+    },
+    {
+      "id": 53,
+      "topic": "KNN",
+      "question": "For small K in KNN, the model typically has:",
+      "question_fr": "Pour un petit K en KNN, le modèle a typiquement :",
+      "options": ["Low bias, high variance", "High bias, low variance", "Low bias, low variance", "High bias, high variance"],
+      "correct": 0,
+      "explanation": "Small K means predictions are based on very few neighbors, making the decision boundary very flexible (low bias) but sensitive to noise (high variance). K=1 perfectly fits training data but generalizes poorly.",
+      "explanation_fr": "Petit K signifie que les prédictions sont basées sur très peu de voisins, rendant la frontière de décision flexible (faible biais) mais sensible au bruit (haute variance)."
+    },
+    {
+      "id": 54,
+      "topic": "KNN",
+      "question": "KNN is called a 'lazy learner' because:",
+      "question_fr": "KNN est appelé un 'apprenant paresseux' parce que :",
+      "options": ["It does no training; all computation happens at prediction time", "It's slow to train", "It uses simple predictions", "It ignores most data"],
+      "correct": 0,
+      "explanation": "KNN has no explicit training phase - it just stores the training data. All computation (finding neighbors) happens at prediction time. This makes training O(1) but prediction O(n) for each query.",
+      "explanation_fr": "KNN n'a pas de phase d'entraînement explicite - il stocke juste les données d'entraînement. Tout le calcul se fait au moment de la prédiction."
+    },
+    {
+      "id": 55,
+      "topic": "KNN",
+      "question": "Which distance metric is most commonly used in KNN?",
+      "question_fr": "Quelle métrique de distance est la plus couramment utilisée en KNN ?",
+      "options": ["Euclidean distance", "Manhattan distance", "Cosine similarity", "Hamming distance"],
+      "correct": 0,
+      "explanation": "Euclidean distance d(x,y) = √Σ(xᵢ-yᵢ)² is most common. However, Manhattan (L1), Minkowski (Lp), and others are used in different contexts. Feature scaling is important since distances are affected by scale.",
+      "explanation_fr": "La distance euclidienne d(x,y) = √Σ(xᵢ-yᵢ)² est la plus courante."
+    },
+    {
+      "id": 56,
+      "topic": "SVM",
+      "question": "The goal of a Support Vector Machine is to find:",
+      "question_fr": "L'objectif d'une Machine à Vecteurs de Support est de trouver :",
+      "options": ["The maximum margin separating hyperplane", "The minimum margin hyperplane", "Any separating hyperplane", "The hyperplane through most points"],
+      "correct": 0,
+      "explanation": "SVM seeks the hyperplane that maximizes the margin - the distance between the hyperplane and the nearest points (support vectors) from each class. This provides better generalization than arbitrary separating hyperplanes.",
+      "explanation_fr": "SVM cherche l'hyperplan qui maximise la marge - la distance entre l'hyperplan et les points les plus proches de chaque classe."
+    },
+    {
+      "id": 57,
+      "topic": "SVM",
+      "question": "Support vectors are:",
+      "question_fr": "Les vecteurs de support sont :",
+      "options": ["Points closest to the decision boundary", "All training points", "Outliers only", "Cluster centroids"],
+      "correct": 0,
+      "explanation": "Support vectors are the training points that lie exactly on the margin boundaries. They 'support' the hyperplane - only these points determine its position. Removing other points doesn't change the solution.",
+      "explanation_fr": "Les vecteurs de support sont les points d'entraînement qui se trouvent exactement sur les frontières de la marge."
+    },
+    {
+      "id": 58,
+      "topic": "SVM",
+      "question": "Hard-margin SVM assumes:",
+      "question_fr": "SVM à marge dure suppose :",
+      "options": ["Data is linearly separable", "Data has noise", "Soft margins are needed", "Non-linear boundaries"],
+      "correct": 0,
+      "explanation": "Hard-margin SVM requires all points to be correctly classified with margin ≥ 1. This only works if data is linearly separable. Soft-margin SVM (with slack variables) handles non-separable data.",
+      "explanation_fr": "SVM à marge dure nécessite que tous les points soient correctement classifiés avec une marge ≥ 1."
+    },
+    {
+      "id": 59,
+      "topic": "SVM",
+      "question": "The kernel trick allows SVMs to:",
+      "question_fr": "L'astuce du noyau permet aux SVM de :",
+      "options": ["Handle non-linear boundaries without explicit feature mapping", "Run faster", "Use less memory", "Avoid support vectors"],
+      "correct": 0,
+      "explanation": "The kernel trick computes inner products in a high-dimensional feature space without explicitly computing the feature transformation. K(x,y) = φ(x)·φ(y) allows non-linear decision boundaries in the original space.",
+      "explanation_fr": "L'astuce du noyau calcule les produits scalaires dans un espace de features de haute dimension sans calculer explicitement la transformation."
+    },
+    {
+      "id": 60,
+      "topic": "SVM",
+      "question": "The RBF (Radial Basis Function) kernel is defined as:",
+      "question_fr": "Le noyau RBF (Fonction à Base Radiale) est défini comme :",
+      "options": ["K(x,y) = exp(-γ||x-y||²)", "K(x,y) = xᵀy", "K(x,y) = (xᵀy + 1)ᵈ", "K(x,y) = |x-y|"],
+      "correct": 0,
+      "explanation": "RBF/Gaussian kernel K(x,y) = exp(-γ||x-y||²) measures similarity that decays exponentially with distance. γ controls the 'width' - larger γ means more localized influence. It can model arbitrarily complex boundaries.",
+      "explanation_fr": "Le noyau RBF K(x,y) = exp(-γ||x-y||²) mesure la similarité qui décroît exponentiellement avec la distance."
+    },
+    {
+      "id": 61,
+      "topic": "SVM",
+      "question": "In soft-margin SVM, slack variables allow:",
+      "question_fr": "En SVM à marge souple, les variables de slack permettent :",
+      "options": ["Some points to violate the margin", "Larger margins always", "Non-linear kernels", "Faster computation"],
+      "correct": 0,
+      "explanation": "Slack variables ξᵢ ≥ 0 allow margin violations: yᵢ(wᵀxᵢ + b) ≥ 1 - ξᵢ. Points with ξᵢ > 0 are inside the margin or misclassified. The penalty C controls the tradeoff between margin size and violations.",
+      "explanation_fr": "Les variables de slack ξᵢ ≥ 0 permettent des violations de marge : yᵢ(wᵀxᵢ + b) ≥ 1 - ξᵢ."
+    },
+    {
+      "id": 62,
+      "topic": "SVM",
+      "question": "The penalty parameter C in soft-margin SVM controls:",
+      "question_fr": "Le paramètre de pénalité C en SVM à marge souple contrôle :",
+      "options": ["Tradeoff between margin and violations", "Kernel width", "Number of support vectors", "Feature dimension"],
+      "correct": 0,
+      "explanation": "C controls the penalty for margin violations. Large C means heavy penalty for violations (similar to hard margin, risk of overfitting). Small C allows more violations (larger margin but more misclassifications).",
+      "explanation_fr": "C contrôle la pénalité pour les violations de marge. Grand C signifie forte pénalité pour les violations."
+    },
+    {
+      "id": 63,
+      "topic": "SVM",
+      "question": "Why does the SVM dual problem only involve inner products?",
+      "question_fr": "Pourquoi le problème dual SVM implique-t-il uniquement des produits scalaires ?",
+      "options": ["This enables the kernel trick", "To reduce computation", "Inner products are easier", "It's a coincidence"],
+      "correct": 0,
+      "explanation": "The dual formulation depends only on xᵢᵀxⱼ inner products. This means we can replace these with any kernel K(xᵢ,xⱼ), implicitly working in a high-dimensional feature space without computing φ(x) explicitly.",
+      "explanation_fr": "La formulation duale ne dépend que des produits scalaires xᵢᵀxⱼ. Cela permet de les remplacer par n'importe quel noyau K(xᵢ,xⱼ)."
+    },
+    {
+      "id": 64,
+      "topic": "Kernels",
+      "question": "The linear kernel is defined as:",
+      "question_fr": "Le noyau linéaire est défini comme :",
+      "options": ["K(x,y) = xᵀy", "K(x,y) = exp(-||x-y||²)", "K(x,y) = (xᵀy)²", "K(x,y) = |x-y|"],
+      "correct": 0,
+      "explanation": "The linear kernel K(x,y) = xᵀy is simply the standard inner product. It corresponds to no feature transformation (φ(x) = x), giving a linear decision boundary. Use when data is linearly separable.",
+      "explanation_fr": "Le noyau linéaire K(x,y) = xᵀy est simplement le produit scalaire standard. Il correspond à pas de transformation de features."
+    },
+    {
+      "id": 65,
+      "topic": "Kernels",
+      "question": "The polynomial kernel K(x,y) = (xᵀy + c)ᵈ with d=2 corresponds to:",
+      "question_fr": "Le noyau polynomial K(x,y) = (xᵀy + c)ᵈ avec d=2 correspond à :",
+      "options": ["Quadratic feature expansion", "Linear features only", "Infinite dimensions", "No transformation"],
+      "correct": 0,
+      "explanation": "With d=2, the polynomial kernel implicitly creates features including all quadratic terms (xᵢ², xᵢxⱼ) and optionally linear terms (depending on c). This enables quadratic decision boundaries without explicitly computing the expansion.",
+      "explanation_fr": "Avec d=2, le noyau polynomial crée implicitement des features incluant tous les termes quadratiques (xᵢ², xᵢxⱼ)."
+    },
+    {
+      "id": 66,
+      "topic": "Kernels",
+      "question": "In kernel ridge regression, the key insight is:",
+      "question_fr": "En régression ridge à noyau, l'insight clé est :",
+      "options": ["Solution can be written using only kernel evaluations", "We must compute explicit features", "Linear kernel is always best", "No regularization is needed"],
+      "correct": 0,
+      "explanation": "The dual form shows α = (K + λI)⁻¹y, where K is the kernel matrix. Predictions use f(x) = Σαᵢk(xᵢ,x). We never need to explicitly compute the feature transformation φ, only kernel evaluations.",
+      "explanation_fr": "La forme duale montre α = (K + λI)⁻¹y. Les prédictions utilisent f(x) = Σαᵢk(xᵢ,x). Pas besoin de calculer explicitement φ."
+    },
+    {
+      "id": 67,
+      "topic": "Kernels",
+      "question": "A kernel function must satisfy which property to be valid?",
+      "question_fr": "Une fonction noyau doit satisfaire quelle propriété pour être valide ?",
+      "options": ["Positive semi-definiteness", "Negativity", "Linearity", "Boundedness"],
+      "correct": 0,
+      "explanation": "Mercer's theorem: K is a valid kernel if and only if the kernel matrix is positive semi-definite for any set of points. This ensures K corresponds to some inner product in a feature space (possibly infinite-dimensional).",
+      "explanation_fr": "Théorème de Mercer : K est un noyau valide si et seulement si la matrice noyau est semi-définie positive."
+    },
+    {
+      "id": 68,
+      "topic": "Ensemble Methods",
+      "question": "Gradient boosting differs from bagging by:",
+      "question_fr": "Le gradient boosting diffère du bagging par :",
+      "options": ["Training trees sequentially on residuals", "Training trees independently", "Using deeper trees", "Random feature selection"],
+      "correct": 0,
+      "explanation": "Gradient boosting trains trees sequentially: each new tree fits the residual/gradient of the loss from previous trees. This creates an additive model F(x) = Σγₘhₘ(x). Bagging trains trees independently on bootstrap samples.",
+      "explanation_fr": "Le gradient boosting entraîne les arbres séquentiellement : chaque nouvel arbre ajuste le résidu/gradient de la perte des arbres précédents."
+    },
+    {
+      "id": 69,
+      "topic": "Ensemble Methods",
+      "question": "AdaBoost increases weights on:",
+      "question_fr": "AdaBoost augmente les poids sur :",
+      "options": ["Misclassified samples", "Correctly classified samples", "All samples equally", "Random samples"],
+      "correct": 0,
+      "explanation": "AdaBoost reweights training data: misclassified samples get higher weights so the next weak learner focuses on them. Correctly classified samples get lower weights. This iteratively improves on hard cases.",
+      "explanation_fr": "AdaBoost repondère les données d'entraînement : les échantillons mal classifiés obtiennent des poids plus élevés."
+    },
+    {
+      "id": 70,
+      "topic": "Ensemble Methods",
+      "question": "Stacking combines multiple models by:",
+      "question_fr": "Le stacking combine plusieurs modèles en :",
+      "options": ["Training a meta-learner on base model predictions", "Averaging predictions", "Majority voting", "Selecting the best model"],
+      "correct": 0,
+      "explanation": "Stacking trains base models, uses their predictions as features for a meta-learner (often another model). The meta-learner learns optimal ways to combine base predictions, potentially outperforming simple averaging or voting.",
+      "explanation_fr": "Le stacking entraîne des modèles de base, utilise leurs prédictions comme features pour un méta-apprenant."
+    },
+    {
+      "id": 71,
+      "topic": "Model Selection",
+      "question": "When model complexity is too high, we typically observe:",
+      "question_fr": "Quand la complexité du modèle est trop élevée, on observe typiquement :",
+      "options": ["Training error << Validation error", "Training error >> Validation error", "Training error ≈ Validation error", "Both errors are high"],
+      "correct": 0,
+      "explanation": "High complexity leads to overfitting: the model memorizes training data (low training error) but fails to generalize (high validation error). The gap between them indicates overfitting severity.",
+      "explanation_fr": "Une complexité élevée mène au sur-ajustement : le modèle mémorise les données d'entraînement mais ne généralise pas."
+    },
+    {
+      "id": 72,
+      "topic": "Model Selection",
+      "question": "R² score measures:",
+      "question_fr": "Le score R² mesure :",
+      "options": ["Proportion of variance explained by the model", "Mean squared error", "Accuracy", "F1 score"],
+      "correct": 0,
+      "explanation": "R² = 1 - RSS/TSS, where TSS is total sum of squares. It measures the proportion of variance in Y explained by X. R²=1 is perfect fit, R²=0 means the model is no better than predicting the mean.",
+      "explanation_fr": "R² = 1 - RSS/TSS mesure la proportion de variance en Y expliquée par X. R²=1 est un ajustement parfait."
+    },
+    {
+      "id": 73,
+      "topic": "Model Selection",
+      "question": "Out-of-sample R² can be negative when:",
+      "question_fr": "Le R² hors échantillon peut être négatif quand :",
+      "options": ["Model performs worse than predicting the mean", "Model is perfect", "Data is normalized", "Features are correlated"],
+      "correct": 0,
+      "explanation": "Out-of-sample R² = 1 - RSS_test/TSS_test can be negative if RSS_test > TSS_test, meaning predictions are worse than simply predicting the test set mean. This indicates severe overfitting or model misspecification.",
+      "explanation_fr": "Le R² hors échantillon peut être négatif si les prédictions sont pires que de prédire simplement la moyenne."
+    },
+    {
+      "id": 74,
+      "topic": "Model Selection",
+      "question": "Forward stepwise selection starts with:",
+      "question_fr": "La sélection pas à pas forward commence avec :",
+      "options": ["No features, adds one at a time", "All features, removes one at a time", "Random subset", "Half the features"],
+      "correct": 0,
+      "explanation": "Forward stepwise starts with the null model (intercept only), then iteratively adds the feature that most improves the criterion (e.g., AIC, BIC, CV error). It's greedy and computationally cheaper than best subset selection.",
+      "explanation_fr": "La sélection pas à pas forward commence avec le modèle nul, puis ajoute itérativement la feature qui améliore le plus le critère."
+    },
+    {
+      "id": 75,
+      "topic": "Model Selection",
+      "question": "Best subset selection evaluates:",
+      "question_fr": "La sélection du meilleur sous-ensemble évalue :",
+      "options": ["All possible feature combinations", "Features one by one", "Random subsets only", "Top k features"],
+      "correct": 0,
+      "explanation": "Best subset selection fits models for all 2ᵖ possible feature combinations and selects the best. This is computationally infeasible for large p, which is why stepwise methods or regularization are often preferred.",
+      "explanation_fr": "La sélection du meilleur sous-ensemble ajuste des modèles pour toutes les 2ᵖ combinaisons possibles de features."
+    },
+    {
+      "id": 76,
+      "topic": "Statistical Learning",
+      "question": "Supervised learning requires:",
+      "question_fr": "L'apprentissage supervisé nécessite :",
+      "options": ["Labeled training data with outcomes Y", "Only features X", "Clustering labels", "Unlabeled data"],
+      "correct": 0,
+      "explanation": "Supervised learning learns a mapping f: X → Y from labeled data (Xᵢ, Yᵢ). The labels Y are provided during training. Unsupervised learning (like clustering) works with X only, discovering structure without labels.",
+      "explanation_fr": "L'apprentissage supervisé apprend un mapping f: X → Y à partir de données labellisées (Xᵢ, Yᵢ)."
+    },
+    {
+      "id": 77,
+      "topic": "Statistical Learning",
+      "question": "The statement 'A supervised learning problem may not contain an outcome variable Y' is:",
+      "question_fr": "L'affirmation 'Un problème d'apprentissage supervisé peut ne pas contenir de variable résultat Y' est :",
+      "options": ["False - supervision requires Y", "True", "Sometimes true", "Depends on the algorithm"],
+      "correct": 0,
+      "explanation": "By definition, supervised learning requires labeled outcomes Y. The task is to learn f such that Y ≈ f(X). Without Y, it's unsupervised learning. This distinguishes supervised from unsupervised approaches.",
+      "explanation_fr": "Par définition, l'apprentissage supervisé nécessite des résultats labellisés Y. Sans Y, c'est de l'apprentissage non supervisé."
+    },
+    {
+      "id": 78,
+      "topic": "Statistical Learning",
+      "question": "Parametric methods assume:",
+      "question_fr": "Les méthodes paramétriques supposent :",
+      "options": ["A fixed functional form with finite parameters", "Infinite parameters", "No assumptions", "Data determines structure"],
+      "correct": 0,
+      "explanation": "Parametric methods assume f has a fixed form (e.g., linear) with a finite number of parameters. We estimate these parameters from data. Non-parametric methods make fewer assumptions and grow with data size.",
+      "explanation_fr": "Les méthodes paramétriques supposent que f a une forme fixe avec un nombre fini de paramètres."
+    },
+    {
+      "id": 79,
+      "topic": "Statistical Learning",
+      "question": "For learning to be feasible, which is NOT required?",
+      "question_fr": "Pour que l'apprentissage soit faisable, qu'est-ce qui N'EST PAS requis ?",
+      "options": ["Each feature must be independent", "Training samples are drawn independently", "Future samples from same distribution", "Some prior knowledge about f"],
+      "correct": 0,
+      "explanation": "Features can be correlated - multicollinearity affects interpretation but not feasibility. What IS needed: i.i.d. samples from a fixed distribution, and some prior knowledge/assumptions about the function class (no free lunch theorem).",
+      "explanation_fr": "Les features peuvent être corrélées. Ce qui EST nécessaire : des échantillons i.i.d. d'une distribution fixe."
+    },
+    {
+      "id": 80,
+      "topic": "Statistical Learning",
+      "question": "Empirical Risk Minimization means:",
+      "question_fr": "La Minimisation du Risque Empirique signifie :",
+      "options": ["Minimizing average loss over training data", "Minimizing true population risk", "Maximizing accuracy", "Ignoring training data"],
+      "correct": 0,
+      "explanation": "ERM minimizes R̂(f) = (1/n)Σᵢ L(yᵢ, f(xᵢ)) - the average loss on training data. We use this as a proxy for true risk R(f) = E[L(Y, f(X))], which we can't compute directly. OLS is ERM with square loss.",
+      "explanation_fr": "La MRE minimise R̂(f) = (1/n)Σᵢ L(yᵢ, f(xᵢ)) - la perte moyenne sur les données d'entraînement."
+    },
+    {
+      "id": 81,
+      "topic": "Linear Regression",
+      "question": "Heteroscedasticity in regression refers to:",
+      "question_fr": "L'hétéroscédasticité en régression fait référence à :",
+      "options": ["Non-constant variance of errors", "Correlated predictors", "Non-normal errors", "Missing values"],
+      "correct": 0,
+      "explanation": "Heteroscedasticity means the error variance σ²(x) varies with x, violating the assumption of constant variance. This doesn't bias OLS estimates but affects standard errors and confidence intervals.",
+      "explanation_fr": "L'hétéroscédasticité signifie que la variance des erreurs σ²(x) varie avec x, violant l'hypothèse de variance constante."
+    },
+    {
+      "id": 82,
+      "topic": "Linear Regression",
+      "question": "Residual analysis can detect:",
+      "question_fr": "L'analyse des résidus peut détecter :",
+      "options": ["All of the above", "Non-linearity", "Heteroscedasticity", "Outliers"],
+      "correct": 0,
+      "explanation": "Residual plots (residuals vs fitted values) reveal: (1) patterns indicating non-linearity, (2) funnel shapes indicating heteroscedasticity, (3) extreme values indicating outliers, (4) autocorrelation in time series.",
+      "explanation_fr": "Les graphiques de résidus révèlent : non-linéarité, hétéroscédasticité, valeurs aberrantes."
+    },
+    {
+      "id": 83,
+      "topic": "Linear Regression",
+      "question": "The intercept β₀ in linear regression represents:",
+      "question_fr": "L'ordonnée à l'origine β₀ en régression linéaire représente :",
+      "options": ["Expected Y when all predictors are zero", "Slope of the line", "Error variance", "Correlation coefficient"],
+      "correct": 0,
+      "explanation": "β₀ is the expected value of Y when all predictors X₁,...,Xₚ = 0. In matrix notation, the first column of X is all 1s (for the intercept), and β₀ is the corresponding coefficient.",
+      "explanation_fr": "β₀ est la valeur attendue de Y quand tous les prédicteurs X₁,...,Xₚ = 0."
+    },
+    {
+      "id": 84,
+      "topic": "Logistic Regression",
+      "question": "A coefficient β₁ = 0.5 in logistic regression means:",
+      "question_fr": "Un coefficient β₁ = 0.5 en régression logistique signifie :",
+      "options": ["One unit increase in X₁ multiplies odds by e^0.5", "Probability increases by 0.5", "X₁ has no effect", "Classification accuracy is 50%"],
+      "correct": 0,
+      "explanation": "In logistic regression, coefficients affect log-odds: log(P/(1-P)) = βᵀX. So a unit increase in X₁ adds β₁ to log-odds, which multiplies odds by e^β₁ = e^0.5 ≈ 1.65.",
+      "explanation_fr": "En régression logistique, les coefficients affectent le log-odds. Une augmentation d'une unité de X₁ multiplie les odds par e^β₁."
+    },
+    {
+      "id": 85,
+      "topic": "Decision Trees",
+      "question": "Decision trees handle missing values by:",
+      "question_fr": "Les arbres de décision gèrent les valeurs manquantes par :",
+      "options": ["Surrogate splits or other strategies", "They cannot handle missing values", "Deleting all rows with missing values", "Setting missing to zero"],
+      "correct": 0,
+      "explanation": "Many tree implementations use surrogate splits: when the primary split feature is missing, use a correlated feature as backup. Other strategies include sending missing values to both branches proportionally.",
+      "explanation_fr": "De nombreuses implémentations d'arbres utilisent des divisions surrogates : quand la feature de division principale est manquante."
+    },
+    {
+      "id": 86,
+      "topic": "Random Forests",
+      "question": "Out-of-bag (OOB) error in random forests estimates:",
+      "question_fr": "L'erreur out-of-bag (OOB) dans les forêts aléatoires estime :",
+      "options": ["Test error without separate validation set", "Training error", "Bias only", "Feature importance"],
+      "correct": 0,
+      "explanation": "Each bootstrap sample excludes ~37% of data (out-of-bag). For each sample, predict using only trees that didn't include it in training. This provides a validation estimate without needing a separate test set.",
+      "explanation_fr": "Chaque échantillon bootstrap exclut ~37% des données. Pour chaque échantillon, prédire en utilisant seulement les arbres qui ne l'ont pas inclus."
+    },
+    {
+      "id": 87,
+      "topic": "K-Means",
+      "question": "K-means with K=n (number of samples) would:",
+      "question_fr": "K-means avec K=n (nombre d'échantillons) :",
+      "options": ["Put each point in its own cluster with WCSS=0", "Be impossible", "Give maximum WCSS", "Not converge"],
+      "correct": 0,
+      "explanation": "With K=n, each point is its own cluster (centroid = the point itself). The within-cluster distance is 0 for every cluster, so WCSS=0. This is trivial and useless but mathematically valid.",
+      "explanation_fr": "Avec K=n, chaque point est son propre cluster. La distance intra-cluster est 0, donc WCSS=0."
+    },
+    {
+      "id": 88,
+      "topic": "SVM",
+      "question": "For linearly separable data, the number of support vectors is typically:",
+      "question_fr": "Pour des données linéairement séparables, le nombre de vecteurs de support est typiquement :",
+      "options": ["Small relative to total samples", "Equal to n", "Equal to number of features", "Zero"],
+      "correct": 0,
+      "explanation": "For linearly separable data, only points on the margin boundary are support vectors. This is typically a small subset of all training points. The hyperplane depends only on these points.",
+      "explanation_fr": "Pour des données linéairement séparables, seuls les points sur la frontière de la marge sont des vecteurs de support."
+    },
+    {
+      "id": 89,
+      "topic": "Regularization",
+      "question": "When λ = 0 in Ridge regression, you get:",
+      "question_fr": "Quand λ = 0 en régression Ridge, vous obtenez :",
+      "options": ["OLS estimates", "All coefficients = 0", "All coefficients = 1", "Undefined results"],
+      "correct": 0,
+      "explanation": "With λ = 0, the penalty term disappears, and we minimize only RSS. This gives the standard OLS solution β̂ = (XᵀX)⁻¹Xᵀy. Ridge with λ=0 equals ordinary least squares.",
+      "explanation_fr": "Avec λ = 0, le terme de pénalité disparaît, donnant la solution MCO standard."
+    },
+    {
+      "id": 90,
+      "topic": "Cross-Validation",
+      "question": "Why is using training error to select hyperparameters problematic?",
+      "question_fr": "Pourquoi utiliser l'erreur d'entraînement pour sélectionner les hyperparamètres est-il problématique ?",
+      "options": ["Favors overfit models", "Is too slow", "Gives random results", "Requires too much data"],
+      "correct": 0,
+      "explanation": "Training error decreases with model complexity (more flexible models fit training data better). Selecting based on training error favors overfit models that won't generalize well to new data.",
+      "explanation_fr": "L'erreur d'entraînement diminue avec la complexité du modèle, favorisant les modèles sur-ajustés."
+    },
+    {
+      "id": 91,
+      "topic": "Bias-Variance Tradeoff",
+      "question": "A very flexible model (many parameters) tends to have:",
+      "question_fr": "Un modèle très flexible (beaucoup de paramètres) tend à avoir :",
+      "options": ["Low bias, high variance", "High bias, low variance", "Low bias, low variance", "High bias, high variance"],
+      "correct": 0,
+      "explanation": "Flexible models can fit complex relationships (low bias) but are sensitive to training data specifics (high variance). They tend to overfit - performing well on training but poorly on test data.",
+      "explanation_fr": "Les modèles flexibles peuvent ajuster des relations complexes (faible biais) mais sont sensibles aux données d'entraînement (haute variance)."
+    },
+    {
+      "id": 92,
+      "topic": "Decision Trees",
+      "question": "Why are decision trees considered 'greedy'?",
+      "question_fr": "Pourquoi les arbres de décision sont-ils considérés comme 'gloutons' ?",
+      "options": ["They make locally optimal splits without lookahead", "They use all features", "They grow until perfect fit", "They're computationally expensive"],
+      "correct": 0,
+      "explanation": "At each node, trees choose the split maximizing immediate information gain without considering how it affects future splits. This greedy approach doesn't guarantee globally optimal trees but is computationally tractable.",
+      "explanation_fr": "À chaque noeud, les arbres choisissent la division maximisant le gain d'information immédiat sans considérer les divisions futures."
+    },
+    {
+      "id": 93,
+      "topic": "KNN",
+      "question": "Why is feature scaling important for KNN?",
+      "question_fr": "Pourquoi la mise à l'échelle des features est-elle importante pour KNN ?",
+      "options": ["Distances are affected by feature scales", "To speed up computation", "To reduce K", "It's not important"],
+      "correct": 0,
+      "explanation": "KNN uses distances to find neighbors. Features with larger scales dominate the distance calculation. Standardization ensures all features contribute equally to distance, preventing scale-dependent results.",
+      "explanation_fr": "KNN utilise les distances. Les features avec de plus grandes échelles dominent le calcul de distance."
+    },
+    {
+      "id": 94,
+      "topic": "Random Forests",
+      "question": "Increasing the number of trees in a random forest:",
+      "question_fr": "Augmenter le nombre d'arbres dans une forêt aléatoire :",
+      "options": ["Generally reduces variance without overfitting", "Causes overfitting", "Has no effect", "Increases bias"],
+      "correct": 0,
+      "explanation": "Unlike individual trees, more trees in a random forest doesn't overfit - averaging more estimators further reduces variance. The limit exists but practically more trees help (with diminishing returns after some point).",
+      "explanation_fr": "Contrairement aux arbres individuels, plus d'arbres ne sur-ajuste pas - moyenner plus d'estimateurs réduit encore la variance."
+    },
+    {
+      "id": 95,
+      "topic": "Logistic Regression",
+      "question": "L1-regularized logistic regression is useful when:",
+      "question_fr": "La régression logistique régularisée L1 est utile quand :",
+      "options": ["Feature selection is desired", "All features are important", "Data is very large", "Classes are balanced"],
+      "correct": 0,
+      "explanation": "L1 penalty encourages sparsity - some coefficients become exactly zero, effectively selecting features. This is useful for high-dimensional data or when interpretability through feature selection is important.",
+      "explanation_fr": "La pénalité L1 encourage la parcimonie - certains coefficients deviennent exactement zéro, sélectionnant les features."
+    },
+    {
+      "id": 96,
+      "topic": "K-Means",
+      "question": "The centroid of a cluster is:",
+      "question_fr": "Le centroïde d'un cluster est :",
+      "options": ["Mean of all points in the cluster", "Median of all points", "A randomly chosen point", "The furthest point from others"],
+      "correct": 0,
+      "explanation": "The centroid μₖ = (1/|Cₖ|)Σₓ∈Cₖ x is the arithmetic mean (average) of all points assigned to cluster k. K-means updates centroids after each assignment step.",
+      "explanation_fr": "Le centroïde μₖ = (1/|Cₖ|)Σₓ∈Cₖ x est la moyenne arithmétique de tous les points assignés au cluster k."
+    },
+    {
+      "id": 97,
+      "topic": "SVM",
+      "question": "The margin in SVM is defined as:",
+      "question_fr": "La marge en SVM est définie comme :",
+      "options": ["2/||w|| for normalized problem", "||w||", "1/||w||²", "The number of support vectors"],
+      "correct": 0,
+      "explanation": "After normalizing constraints to yᵢ(wᵀxᵢ + b) ≥ 1, the distance from hyperplane to margin boundary is 1/||w||. The total margin width between classes is 2/||w||. Maximizing margin = minimizing ||w||.",
+      "explanation_fr": "Après normalisation, la distance de l'hyperplan à la frontière de marge est 1/||w||. La largeur totale de la marge est 2/||w||."
+    },
+    {
+      "id": 98,
+      "topic": "Ensemble Methods",
+      "question": "Weak learners in boosting are:",
+      "question_fr": "Les apprenants faibles en boosting sont :",
+      "options": ["Models slightly better than random", "Perfect classifiers", "Deep neural networks", "Unsupervised models"],
+      "correct": 0,
+      "explanation": "Weak learners need only be slightly better than random guessing (e.g., shallow decision trees with few nodes). Boosting combines many weak learners to create a strong learner through weighted voting or additive combination.",
+      "explanation_fr": "Les apprenants faibles doivent juste être légèrement meilleurs que le hasard. Le boosting combine plusieurs apprenants faibles."
+    },
+    {
+      "id": 99,
+      "topic": "Model Selection",
+      "question": "AIC (Akaike Information Criterion) penalizes:",
+      "question_fr": "L'AIC (Critère d'Information d'Akaike) pénalise :",
+      "options": ["Model complexity (number of parameters)", "Training error only", "Test error only", "Runtime"],
+      "correct": 0,
+      "explanation": "AIC = -2ln(likelihood) + 2k, where k is the number of parameters. It balances fit (likelihood) against complexity (k). Lower AIC indicates better model accounting for both fit and parsimony.",
+      "explanation_fr": "AIC = -2ln(vraisemblance) + 2k, où k est le nombre de paramètres. Il équilibre l'ajustement et la complexité."
+    },
+    {
+      "id": 100,
+      "topic": "Statistical Learning",
+      "question": "The 'No Free Lunch' theorem states that:",
+      "question_fr": "Le théorème 'No Free Lunch' stipule que :",
+      "options": ["No algorithm is best for all problems", "Some algorithms are universally best", "More data always helps", "Simple models are always better"],
+      "correct": 0,
+      "explanation": "No Free Lunch: averaged over all possible problems, all algorithms perform equally. Any algorithm that excels on one class of problems must perform poorly on others. We need prior knowledge to choose appropriate methods.",
+      "explanation_fr": "No Free Lunch : moyenné sur tous les problèmes possibles, tous les algorithmes sont équivalents. Il faut des connaissances a priori."
+    }
+  ]
+}
