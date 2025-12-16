@@ -475,6 +475,11 @@ if not st.session_state.quiz_started:
 # Quiz in progress
 elif st.session_state.current_question < len(st.session_state.quiz_questions):
     q = st.session_state.quiz_questions[st.session_state.current_question]
+
+    # Validate question structure
+    if not isinstance(q, dict) or 'correct' not in q or 'options' not in q:
+        st.error(f"Error: Question at index {st.session_state.current_question} is malformed. Question data: {q}")
+        st.stop()
     
     # Progress bar
     progress = (st.session_state.current_question) / st.session_state.total_questions
@@ -549,9 +554,14 @@ elif st.session_state.current_question < len(st.session_state.quiz_questions):
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
             if st.button("✅ Submit Answer", use_container_width=True, disabled=selected is None):
+                # Validate question has required fields
+                if 'correct' not in q:
+                    st.error(f"Question {q.get('id', 'unknown')} is missing the 'correct' field. Please check the quiz_questions_v4.json file.")
+                    st.stop()
+
                 st.session_state.selected_answer = q['options'].index(selected)
                 st.session_state.answered = True
-                
+
                 if st.session_state.selected_answer == q['correct']:
                     st.session_state.score += 1
                     st.session_state.streak += 1
@@ -560,7 +570,7 @@ elif st.session_state.current_question < len(st.session_state.quiz_questions):
                 else:
                     st.session_state.streak = 0
                     xp_earned = calculate_xp(False, 0)
-                
+
                 st.session_state.xp += xp_earned
                 st.session_state.level = get_level(st.session_state.xp)
                 st.session_state.answers_history.append({
@@ -573,6 +583,11 @@ elif st.session_state.current_question < len(st.session_state.quiz_questions):
     
     else:
         # Show result
+        # Validate question has required fields
+        if 'correct' not in q:
+            st.error(f"Question {q.get('id', 'unknown')} is missing the 'correct' field. Please check the quiz_questions_v4.json file.")
+            st.stop()
+
         is_correct = st.session_state.selected_answer == q['correct']
         
         if is_correct:
