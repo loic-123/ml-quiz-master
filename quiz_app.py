@@ -281,10 +281,16 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Load questions
-@st.cache_data
+@st.cache_data(show_spinner=False)
 def load_questions():
     with open('quiz_questions_v4.json', 'r', encoding='utf-8') as f:
-        return json.load(f)
+        data = json.load(f)
+        # Normalize field names: ensure all questions use 'correct' not 'correct_answer'
+        for q in data['questions']:
+            if 'correct_answer' in q and 'correct' not in q:
+                q['correct'] = q['correct_answer']
+                del q['correct_answer']
+        return data
 
 data = load_questions()
 questions = data['questions']
@@ -477,9 +483,18 @@ elif st.session_state.current_question < len(st.session_state.quiz_questions):
     q = st.session_state.quiz_questions[st.session_state.current_question]
 
     # Validate question structure
-    if not isinstance(q, dict) or 'correct' not in q or 'options' not in q:
+    if not isinstance(q, dict) or 'options' not in q:
         st.error(f"Error: Question at index {st.session_state.current_question} is malformed. Question data: {q}")
         st.stop()
+
+    # Handle both 'correct' and 'correct_answer' field names for compatibility
+    if 'correct' not in q and 'correct_answer' not in q:
+        st.error(f"Error: Question {q.get('id', 'unknown')} is missing both 'correct' and 'correct_answer' fields.")
+        st.stop()
+
+    # Normalize the field name to 'correct' if it's 'correct_answer'
+    if 'correct_answer' in q and 'correct' not in q:
+        q['correct'] = q['correct_answer']
     
     # Progress bar
     progress = (st.session_state.current_question) / st.session_state.total_questions
