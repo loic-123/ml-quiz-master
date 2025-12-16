@@ -283,7 +283,7 @@ st.markdown("""
 # Load questions
 @st.cache_data
 def load_questions():
-    with open('quiz_questions.json', 'r', encoding='utf-8') as f:
+    with open('quiz_questions_v4.json', 'r', encoding='utf-8') as f:
         return json.load(f)
 
 data = load_questions()
